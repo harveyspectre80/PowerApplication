@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body style="  background-color: #10eaf0;">
+<div>
+    <table style="
+  font-family: oxygen, serif;">
+  
+        <th style="position:relative" bottom:"800px">Exponentialvalue Finder Application</th>
+        <tr>
+            <td style="position:relative" left:"800px" >
+                Base Value:
+            </td>
+
+            <td>
+                <input type="text" id="baseValueId" name="base" placeholder="enter base value" >
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Raised Value:
+            </td>
+            <td>
+                <input type="text" id="raisedValueId" name="exponent" placeholder="enter raised value" required>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" id="submit" value="Get Result">
+            </td>
+            <td>
+                <input type="text" id="result" name="result">
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+<script>		
+$(document).ready(function(){
+$("#submit").click(function(){
+
+var result=document.getElementById("result").value
+	console.log(result)
+var basevalueid=document.getElementById("baseValueId").value
+var raisedvalueid=document.getElementById("raisedValueId").value
+   
+	url="http:localhost:8085/exponentialvaluecalculator/calculate"
+	data=JSON.stringify({
+			"baseValue":basevalueid,
+			"raisedValue":raisedvalueid})
+
+$.ajax({
+  url:url,
+  type:"POST",
+  data:data,
+  contentType:"application/json; charset=utf-8",
+  dataType:"json",
+  success: function(data){
+    
+document.getElementById("result").value=data;
+  }
+})
+
+  });
+});
+
+
+</script>
+</body>
+</html>
